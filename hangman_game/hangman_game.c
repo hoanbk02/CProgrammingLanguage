@@ -114,14 +114,25 @@ int main()
 
         if (check_letter_in_word(guess_letter, secret_word))
         {
-            if (check_letter_in_word(guess_letter, guessed_word) == 0)
+            if (check_letter_in_word(guess_letter, guessed_word) == 0) {
                 guessed_word[strlen(guessed_word)] = guess_letter;
-            printf(">>> Good guess! \n");
+                printf(">>> Good guess! \n");
+            }
+            else {
+                printf(">>> You already guessed that letter!\n");
+                continue;
+            }
         }
         else
         {
-            missed_letters[strlen(missed_letters)] = guess_letter;
-            printf(">>> Oops! That letter is not in my word\n");
+            if (check_letter_in_word(guess_letter, missed_letters) == 0) {
+                missed_letters[strlen(missed_letters)] = guess_letter;
+                printf(">>> Oops! That letter is not in my word\n");
+            }
+            else {
+                printf(">>> You already guessed that letter!\n");
+                continue;
+            }
         }
 
         int game_s = game_success(guessed_word, secret_word, missed_letters);
